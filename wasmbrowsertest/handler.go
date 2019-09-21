@@ -111,6 +111,7 @@ license that can be found in the LICENSE file.
 	<script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
 	(see https://caniuse.com/#feat=textencoder)
 	-->
+	<script type="text/javascript" src="weblas.js"></script>
 	<script src="wasm_exec.js"></script>
 	<script>
 		if (!WebAssembly.instantiateStreaming) { // polyfill
@@ -140,7 +141,6 @@ license that can be found in the LICENSE file.
 			document.getElementById("doneButton").disabled = false;
 		})();
 	</script>
-	<script type="text/javascript" src="weblas.js"></script>
 
 	<button id="doneButton" disabled>Done</button>
 </body>
