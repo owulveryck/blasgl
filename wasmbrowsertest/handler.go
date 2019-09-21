@@ -71,6 +71,12 @@ func (ws *wasmServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 		}()
 		http.ServeContent(w, r, r.URL.Path, time.Now(), f)
+	case "/weblas.map.json":
+		w.Header().Set("Content-Type", "application/javascript")
+		w.Header().Set("Content-Length", strconv.Itoa(len(weblasMap)))
+		if _, err := w.Write([]byte(weblasMap)); err != nil {
+			ws.logger.Println("unable to write weblas.")
+		}
 	case "/weblas.js":
 		w.Header().Set("Content-Type", "application/javascript")
 		w.Header().Set("Content-Length", strconv.Itoa(len(weblas)))
