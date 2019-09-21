@@ -2,7 +2,9 @@
 
 package blasgl
 
-import "gonum.org/v1/gonum/blas"
+import (
+	"gonum.org/v1/gonum/blas"
+)
 
 // Sgemm ...
 func (Implementation) Sgemm(tA blas.Transpose, tB blas.Transpose, m int, n int, k int, alpha float32, a []float32, lda int, b []float32, ldb int, beta float32, c []float32, ldc int) {
