@@ -25,4 +25,6 @@ Then run:
 
 The tests should pass
 
-The tests should pass
+# Basic bench
+
+`GOOS=js GOARCH=wasm go test -bench=BenchmarkSgemmSmSmSm -run=^$ -exec ./wasmbrowsertest/wasmbrowsertest -v`
