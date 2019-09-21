@@ -25,29 +25,27 @@ func (Implementation) Sgemm(tA blas.Transpose, tB blas.Transpose, m int, n int, 
 		//
 		// TODO use the webladgl here
 		/*
-			// From the example
-			// create Matrices as arrays
-			var height_A = 1024, width_A = 1024,
-				height_B = 1024, width_B = 1024;
+						// From the example
+						// create Matrices as arrays
+						var height_A = 1024, width_A = 1024,
+							height_B = 1024, width_B = 1024;
 
-			var A = new Float32Array(height_A * width_A);
-			var B = new Float32Array(height_B * width_B);
+						var A = new Float32Array(height_A * width_A);
+						var B = new Float32Array(height_B * width_B);
 
-			// fill A and B with science
+						// fill A and B with science
 
-			var M = height_A,
-			    N = width_B,
-			    K = height_B; // must match width_A
+						var M = height_A,
+						    N = width_B,
+						    K = height_B; // must match width_A
 
-			var alpha = 1.0;
-			var beta = 0.0;
-			var C = new Float32Array(width_B)      // specialized for neural net bias calculation
+						var alpha = 1.0;
+						var beta = 0.0;
+						var C = new Float32Array(width_B)      // specialized for neural net bias calculation
 
-			// result will contain matrix multiply of A x B (times alpha)
-			result = weblas.sgemm(M, N, K, alpha, A, B, beta, C);
-		*/
-		//fmt.Printf("m x n: %vx%v, k: %v, a: %v, b: %v, c: %v\n", m, n, k, len(a), len(b), len(c))
-		/*
+						// result will contain matrix multiply of A x B (times alpha)
+						result = weblas.sgemm(M, N, K, alpha, A, B, beta, C);
+					//fmt.Printf("m x n: %vx%v, k: %v, a: %v, b: %v, c: %v\n", m, n, k, len(a), len(b), len(c))
 			gonumImpl.Sgemm(tA, tB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 		*/
 		aJS := SliceToTypedArray(a)
@@ -55,7 +53,6 @@ func (Implementation) Sgemm(tA blas.Transpose, tB blas.Transpose, m int, n int, 
 		cJS := SliceToTypedArray(c[:m])
 		ret := js.Global().Get("weblas").Call("sgemm", m, n, k, alpha, aJS, bJS, beta, cJS)
 		_ = ret
-		//gonumImpl.Sgemm(tA, tB, m, n, k, alpha, a, lda, b, ldb, beta, c, ldc)
 	}
 }
 
