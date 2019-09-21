@@ -71,6 +71,12 @@ func (ws *wasmServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 		}()
 		http.ServeContent(w, r, r.URL.Path, time.Now(), f)
+	case "/weblas.map.json":
+		w.Header().Set("Content-Type", "application/javascript")
+		w.Header().Set("Content-Length", strconv.Itoa(len(weblasMap)))
+		if _, err := w.Write([]byte(weblasMap)); err != nil {
+			ws.logger.Println("unable to write weblas.")
+		}
 	case "/weblas.js":
 		w.Header().Set("Content-Type", "application/javascript")
 		w.Header().Set("Content-Length", strconv.Itoa(len(weblas)))
@@ -105,7 +111,6 @@ license that can be found in the LICENSE file.
 	<script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
 	(see https://caniuse.com/#feat=textencoder)
 	-->
-	<script type="text/javascript" src="weblas.js"></script>
 	<script src="wasm_exec.js"></script>
 	<script>
 		if (!WebAssembly.instantiateStreaming) { // polyfill
@@ -135,6 +140,7 @@ license that can be found in the LICENSE file.
 			document.getElementById("doneButton").disabled = false;
 		})();
 	</script>
+	<script type="text/javascript" src="weblas.js"></script>
 
 	<button id="doneButton" disabled>Done</button>
 </body>
